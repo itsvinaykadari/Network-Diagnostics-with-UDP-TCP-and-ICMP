@@ -1,88 +1,72 @@
-### README for Running UDP and TCP Pinger Programs
+# Network Diagnostics with UDP, TCP, and ICMP
 
-This guide explains how to run the provided programs from each folder (`Part1`, `Part2`, and `Part3`). Each folder contains both client and server files. Below are the instructions for running each part and file in a simple format.
-
----
-
-## **Part 1: UDP Pinger**
-
-### **Server:**
-- File: `UDP_icmp_server.py` or `UDPPingerServer.py`
-- **How to run:**
-  1. Open a terminal.
-  2. Navigate to the `Part1` directory.
-  3. Run the server:
-     ```bash
-     python3 UDP_icmp_server.py
-     ```
-     or
-     ```bash
-     python3 UDPPingerServer.py
-     ```
-
-### **Client:**
-- File: `UDP_icmp_client.py` or `UDPPingerClient.py`
-- **How to run:**
-  1. Open a second terminal.
-  2. Navigate to the `Part1` directory.
-  3. Run the client:
-     ```bash
-     python3 UDP_icmp_client.py
-     ```
-     or
-     ```bash
-     python3 UDPPingerClient.py
-     ```
+This project focuses on implementing and analyzing network diagnostic tools using **UDP, TCP, and ICMP** protocols through Python socket programming. The objective is to measure **RTT (Round Trip Time)**, detect **timeouts**, analyze **packet loss**, and study the effects of **network impairments** such as simulated packet loss and ICMP errors.
 
 ---
 
-## **Part 2: TCP Pinger**
+## 📌 Features
 
-### **Server:**
-- File: `TCP_icmp_server.py`, `TCPPingerServer.py`, or `TCPPingerThreading.py`
-- **How to run:**
-  1. Open a terminal.
-  2. Navigate to the `Part2` directory.
-  3. Run the server:
-     ```bash
-     python3 TCP_icmp_server.py
-     ```
-     or
-     ```bash
-     python3 TCPPingerServer.py
-     ```
-     For multi-threading:
-     ```bash
-     python3 TCPPingerThreading.py
-     ```
+### 1. UDP Pinger
+- Implemented UDP Pinger Client and Server.
+- Measured **RTT** using timestamping before/after sending packets.
+- Handled **timeouts** using exceptions and simulated **packet loss** via Python `random` module.
+- Emulated real packet loss at NIC using **Linux tc-netem** tool.
+- Added ICMP error simulation (Destination Unreachable, Port Unreachable).
 
-### **Client:**
-- File: `TCP_icmp_client.py` or `TCPPingerClient.py`
-- **How to run:**
-  1. Open a second terminal.
-  2. Navigate to the `Part2` directory.
-  3. Run the client:
-     ```bash
-     python3 TCP_icmp_client.py
-     ```
-     or
-     ```bash
-     python3 TCPPingerClient.py
-     ```
+### 2. TCP Pinger
+- Implemented **TCP Pinger Client and Server** with socket programming.
+- Reliable connection-oriented communication.
+- Measured **min, max, average RTT** and packet loss rate.
+- **Multithreaded TCP Server**: supports concurrent clients using Python `threading`.
+- Simulated TCP packet loss using **Linux tc-netem**.
+
+### 3. ICMP Pinger
+- Implemented ICMP client using raw sockets to send ICMP packets.
+- Tested connectivity to hosts (e.g., google.com).
+- Handled ICMP errors and packet losses gracefully.
 
 ---
 
-## **Part 3: ICMP Pinger**
+## ⚙️ Tools & Technologies
+- **Python 3**
+- **Socket Programming**
+- **Multithreading**
+- **Linux tc-netem & iptables** (to emulate packet loss)
+- **Raw Sockets** (for ICMP simulation)
 
-### **Server:**
-- No separate server file required for this part.
+---
 
-### **Client:**
-- File: `ICMP_Pinger.py`
-- **How to run:**
-  1. Open a terminal.
-  2. Navigate to the `Part3` directory.
-  3. Run the client:
-     ```bash
-     python3 ICMP_Pinger.py
-     ```
+## 🚀 Use Cases
+- **Network Performance Testing** → Measure RTT, latency, and packet loss across networks.
+- **Troubleshooting Connectivity** → Detect host availability & differentiate TCP vs UDP issues.
+- **Load Testing & Scalability** → Multithreaded TCP server to simulate multiple concurrent clients.
+- **Realistic Network Simulation** → Emulate real-world conditions (loss, delay, errors).
+- **Educational Tool** → Hands-on learning of **UDP, TCP, ICMP** and error handling in networking.
+
+---
+
+## 📂 Project Structure
+```
+├── UDP_Pinger_Client.py
+├── UDP_Pinger_Server.py
+├── TCP_Pinger_Client.py
+├── TCP_Pinger_Server.py
+├── ICMP_Pinger.py
+├── TCP_ICMP_Server.py
+├── TCP_ICMP_Client.py
+└── README.md
+```
+
+---
+
+## 🧑‍🤝‍🧑 Contributors
+- **Vinaykumar Kadari (CS24MTECH14008)** → TCP Pinger, ICMP Pinger, Error Handling
+- **P. Rushi Keswar Reddy (CS24MTECH11018)** → ICMP_Pinger, TCPPingerThreading, UDP ICMP Client/Server
+- **Kishor Kumar Patro (SM24MTECH14001)** → UDP Pinger, UDP ICMP Server
+
+---
+
+## 📝 Acknowledgements
+- [Python Socket Programming Docs](https://docs.python.org/3/howto/sockets.html)
+- [GeeksforGeeks: ICMP Pinger](https://www.geeksforgeeks.org/internet-control-message-protocol-icmp/)
+- [Traffic Control with tc-netem](https://www.pico.net/kb/how-can-i-simulate-delayed-and-dropped-packets-in-linux/)
