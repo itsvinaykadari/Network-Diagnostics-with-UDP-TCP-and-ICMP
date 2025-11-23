@@ -1,3 +1,28 @@
+"""
+Network Diagnostics: UDP Pinger Server with ICMP Error Simulation
+
+PROBLEM STATEMENT:
+    Network diagnostic tools need to simulate various ICMP error conditions.
+    This server sends ICMP error packets to test client resilience and error handling.
+    It helps validate how applications respond to network unreachability and port closure.
+
+DESCRIPTION:
+    This module implements a UDP ping server with ICMP error simulation that:
+    - Listens for UDP ping packets from clients
+    - Responds to valid ping requests
+    - Simulates ICMP Destination Unreachable errors
+    - Simulates ICMP Port Unreachable errors
+    - Randomly generates error conditions for realistic testing
+    - Provides comprehensive error diagnostic capabilities
+
+USE CASES:
+    - ICMP error condition simulation
+    - Network error handling testing
+    - Port closure and unreachability scenarios
+    - Network resilience validation
+    - Diagnostic tool development and testing
+"""
+
 import random
 import socket
 import struct
@@ -5,7 +30,7 @@ import os
 
 # Create a UDP socket
 serverSocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_ip = '172.21.132.171'
+server_ip = '127.0.0.1'
 server_port = 14008
 serverSocket.bind((server_ip, server_port))
 

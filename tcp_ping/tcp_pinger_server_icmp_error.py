@@ -1,3 +1,28 @@
+"""
+Network Diagnostics: TCP Pinger Server with ICMP Error Simulation
+
+PROBLEM STATEMENT:
+    TCP servers may need to simulate connection failures and ICMP errors.
+    This server demonstrates error injection for comprehensive client testing
+    and validation of error handling mechanisms.
+
+DESCRIPTION:
+    This module implements a TCP ping server with ICMP error simulation that:
+    - Accepts TCP connections from clients
+    - Responds to valid ping requests
+    - Simulates ICMP Destination Unreachable errors
+    - Simulates ICMP Port Unreachable errors
+    - Uses raw sockets to send ICMP error packets
+    - Validates client error handling capabilities
+
+USE CASES:
+    - TCP server error condition simulation
+    - ICMP error injection for testing
+    - Connection failure scenarios
+    - Network error recovery validation
+    - Diagnostic tool development
+"""
+
 import random
 import struct
 from socket import *
@@ -21,7 +46,7 @@ def create_icmp_packet(type, code):
 
 # Bind the TCP socket
 serverSocket = socket(AF_INET, SOCK_STREAM)
-serverSocket.bind(('172.21.135.35', 14008))
+serverSocket.bind(('127.0.0.1', 14008))
 serverSocket.listen(5)
 
 print("TCP server up and listening...")

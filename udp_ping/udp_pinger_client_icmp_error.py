@@ -1,3 +1,28 @@
+"""
+Network Diagnostics: UDP Pinger Client with ICMP Error Handling
+
+PROBLEM STATEMENT:
+    UDP applications need to detect and handle ICMP error messages.
+    When a UDP packet cannot reach its destination, ICMP error packets are returned.
+    This utility captures these ICMP errors to provide comprehensive error reporting.
+
+DESCRIPTION:
+    This module implements a UDP ping client with ICMP error detection that:
+    - Sends UDP ping packets to remote servers
+    - Listens for ICMP error responses using raw sockets
+    - Detects Destination Unreachable and Port Unreachable errors
+    - Measures round-trip time for successful packets
+    - Reports network unreachability and port closure scenarios
+    - Handles timeouts and multiple error conditions
+
+USE CASES:
+    - UDP error diagnosis and network troubleshooting
+    - Port reachability testing
+    - Network path validation
+    - ICMP error message analysis
+    - UDP-based service diagnostics
+"""
+
 import socket
 import time
 import struct
@@ -16,7 +41,7 @@ while True:
     num = int(input("Set the number of ping operations: "))
     print("Initiating Ping\n")
     
-    server_ip = '172.21.132.171'
+    server_ip = '127.0.0.1'
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     client.settimeout(1)
     

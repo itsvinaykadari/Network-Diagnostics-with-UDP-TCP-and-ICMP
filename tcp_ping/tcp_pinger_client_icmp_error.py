@@ -1,3 +1,28 @@
+"""
+Network Diagnostics: TCP Pinger Client with ICMP Error Simulation
+
+PROBLEM STATEMENT:
+    TCP connections may fail due to network errors or port unavailability.
+    This client simulates and detects ICMP error messages during TCP communication.
+    It helps diagnose network issues and test error handling in TCP applications.
+
+DESCRIPTION:
+    This module implements a TCP ping client with ICMP error handling that:
+    - Establishes TCP connections to remote servers
+    - Sends TCP ping messages and measures RTT
+    - Detects and handles ICMP error messages
+    - Simulates Destination Unreachable errors
+    - Reports port unreachability
+    - Provides detailed error diagnostics and recovery
+
+USE CASES:
+    - TCP connection error diagnosis
+    - ICMP error detection and handling
+    - Network reachability testing
+    - Port availability validation
+    - Connection resilience testing
+"""
+
 import time
 from socket import *
 
@@ -7,6 +32,7 @@ client = socket(AF_INET, SOCK_STREAM)
 # Set a timeout of 1 second
 client.settimeout(1)
 server_ip = '127.0.0.1'
+
 # Server address and port
 server_address = (server_ip, 14008)
 

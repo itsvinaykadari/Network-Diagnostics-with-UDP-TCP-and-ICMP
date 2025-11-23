@@ -1,3 +1,27 @@
+"""
+Network Diagnostics: ICMP Pinger Utility
+
+PROBLEM STATEMENT:
+    In network diagnostics, measuring network connectivity and latency is critical.
+    This utility implements an ICMP (Internet Control Message Protocol) pinger using raw sockets
+    to send ping requests to remote hosts and analyze network performance metrics.
+
+DESCRIPTION:
+    This module provides comprehensive ICMP ping functionality that:
+    - Sends ICMP echo requests to remote hosts using raw sockets
+    - Measures round-trip time (RTT) for network latency analysis
+    - Calculates minimum, maximum, and average RTT statistics
+    - Detects and handles ICMP error responses (Destination Unreachable, Host Unreachable, etc.)
+    - Reports packet loss rates and network connectivity status
+    - Works across different network topologies and configurations
+
+USE CASES:
+    - Host reachability testing and network troubleshooting
+    - Latency measurement and network performance analysis
+    - ICMP error handling and diagnosis
+    - Network connectivity verification
+"""
+
 from socket import *
 import os
 import sys
@@ -8,6 +32,7 @@ import select
 ICMP_ECHO_REQUEST = 8
 ICMP_DEST_UNREACHABLE = 3 
 rtts = []
+
 def checksum(string):
     """
     This function takes a argument of a string to calculate the checksum value
@@ -125,7 +150,7 @@ def doOnePing(destAddr, timeout):
     mySocket.close()
     return delay
 
-def ping(host,numPing, timeout=1):
+def ping(host, numPing, timeout=1):
     """
     Ping a host and print the result.
 
@@ -157,5 +182,7 @@ def ping(host,numPing, timeout=1):
     else:
         print("No RTTs recorded.")
         print("Packet loss rate: 100%")
-numPing=int(input("Enter number of pings :"))
-ping("192.168.167.187",numPing)  
+
+if __name__ == "__main__":
+    numPing = int(input("Enter number of pings: "))
+    ping("8.8.8.8", numPing)

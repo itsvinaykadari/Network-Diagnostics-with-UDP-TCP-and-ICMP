@@ -1,14 +1,36 @@
-# UDPPingerClient.py
+"""
+Network Diagnostics: UDP Pinger Client
+
+PROBLEM STATEMENT:
+    UDP-based ping tools are essential for testing network connectivity over connectionless protocols.
+    Unlike TCP, UDP provides faster, lightweight communication but lacks reliability guarantees.
+    This utility helps measure network latency, packet loss, and connectivity using UDP packets.
+
+DESCRIPTION:
+    This module implements a UDP ping client that:
+    - Establishes connectionless UDP communication with remote servers
+    - Sends UDP ping packets and measures round-trip time (RTT)
+    - Handles timeouts and packet loss scenarios
+    - Calculates network statistics (min, max, average RTT)
+    - Reports comprehensive packet loss metrics
+    - Provides continuous ping capability with user-defined packet counts
+
+USE CASES:
+    - UDP network performance measurement
+    - Lightweight network connectivity testing
+    - Latency analysis for UDP-based applications
+    - Network reliability assessment without connection overhead
+"""
+
 import socket
-import time  # Import time library
+import time
 
 while True:
-    
     # Ask the user to set the number of ping operations
     num = int(input("Set the number of ping operations: "))
             
     print("Initiating Ping\n")
-    server_ip = '172.21.149.80'
+    server_ip = '127.0.0.1'
     
     # Create a UDP socket
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
@@ -21,7 +43,7 @@ while True:
     packet_lost = 0  # Count of lost (timed-out) pings
 
     try:
-        # Loop to ping the server 'num_pings' times
+        # Loop to ping the server 'num' times
         for i in range(num):
             start = time.time()  # Start time when message is sent to server
             message = 'Ping ' + str(i) + " " + time.ctime(start)
